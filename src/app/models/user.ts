@@ -27,9 +27,10 @@ export class User {
     transactions: Transaction[] | undefined;
     responses: Response[] | undefined;
 
-    constructor(first_name?: string, last_name?: string, birth_date?: Date, email?: string, password?: string, faculty?: FacultyType, major?: string, gender?: GenderType) {
-        this.incentive = 5.0,
-        this.milestone = 100.0,
+    constructor(userId?: number, first_name?: string, last_name?: string, birth_date?: Date, email?: string, password?: string, faculty?: FacultyType, major?: string, gender?: GenderType) {
+        this.incentive = 5.0;
+        this.milestone = 100.0;
+        this.userId = userId;
         this.first_name = first_name;
         this.last_name = last_name;
         this.birth_date = birth_date;
