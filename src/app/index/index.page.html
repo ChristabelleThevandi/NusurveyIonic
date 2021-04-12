@@ -1,22 +1,30 @@
 <ion-header>
   <ion-toolbar>
-  <ion-buttons slot="start">
-    <ion-menu-button></ion-menu-button>
-  </ion-buttons>
-  <ion-title>
-    DemoIonic
-  </ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Home
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-card>      
-  <ion-card-header>        
-    <ion-card-title>Welcome to Demo Ionic</ion-card-title>
-  </ion-card-header>
-  <ion-card-content>
-    <p>Use the side menu to navigate around this demo app.</p>
-  </ion-card-content>
+  <ion-card *ngIf="sessionService.getIsLogin() == false">
+    <ion-card-header>
+      <ion-card-title>Welcome to NUS Survey</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>Please login or register to start answering surveys!</p>
+    </ion-card-content>
+  </ion-card>
+  <ion-card *ngIf="sessionService.getIsLogin() == true">
+    <ion-card-header>
+      <ion-card-title>Search</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>Surveys here</p>
+    </ion-card-content>
   </ion-card>
 </ion-content>
 
