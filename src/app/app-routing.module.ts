@@ -17,6 +17,39 @@ const routes: Routes = [
     path: 'register',
     loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
   },
+  {
+    path: 'view-profile',
+    loadChildren: () => import('./view-profile/view-profile.module').then( m => m.ViewProfilePageModule)
+  },
+  {
+    path: 'view-transactions',
+    loadChildren: () => import('./view-transactions/view-transactions.module').then( m => m.ViewTransactionsPageModule)
+  },
+  {
+    path: 'survey-result',
+    loadChildren: () => import('./survey-result/survey-result.module').then( m => m.SurveyResultPageModule)
+  },
+  {
+    path: 'survey-description',
+    loadChildren: () => import('./survey-description/survey-description.module').then( m => m.SurveyDescriptionPageModule)
+  },
+  {
+    path: 'submit-confirmation',
+    loadChildren: () => import('./submit-confirmation/submit-confirmation.module').then( m => m.SubmitConfirmationPageModule)
+  },
+  {
+    path: 'view-filled-surveys',
+    loadChildren: () => import('./view-filled-surveys/view-filled-surveys.module').then( m => m.ViewFilledSurveysPageModule)
+  },
+  {
+    path: 'survey-page',
+    loadChildren: () => import('./survey-page/survey-page.module').then( m => m.SurveyPagePageModule)
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+  },
+
 ];
 
 @NgModule({

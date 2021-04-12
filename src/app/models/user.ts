@@ -16,7 +16,7 @@ export class User {
     faculty: FacultyType | undefined;
     major: string | undefined;
     avatar: string | undefined;
-    gender: GenderType | undefined;
+    gender: GenderType | GenderType.MALE;
     incentive: number | undefined;
     milestone : number | undefined;
 

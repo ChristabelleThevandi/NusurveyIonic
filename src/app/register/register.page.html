@@ -1,9 +1,182 @@
 <ion-header>
+
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="back()">
+        <ion-icon slot="start" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
     <ion-title>Register</ion-title>
   </ion-toolbar>
+
 </ion-header>
 
 <ion-content>
 
+  <ion-card *ngIf="sessionService.getIsLogin() == false">
+
+    <ion-card-content>
+
+      <div *ngIf="registerError == true" style="color: red;">
+        {{errorMessage}}
+      </div>
+
+      <form #userRegisterForm="ngForm" (ngSubmit)="userRegister(userRegisterForm)">
+
+        <div style="color: red;">
+
+          <div *ngIf="email.invalid && (email.dirty || email.touched || submitted)" class="errorText">
+            <div *ngIf="email.errors.required">
+              Email is required.
+            </div>
+            <div *ngIf="email.errors.minlength">
+              Email must be at least 4 characters long.
+            </div>
+          </div>
+
+          <div *ngIf="password.invalid && (password.dirty || password.touched || submitted)" class="errorText">
+            <div *ngIf="password.errors.required">
+              Password is required.
+            </div>
+            <div *ngIf="password.errors.minlength">
+              Password must be at least 4 characters long.
+            </div>
+            <div *ngIf="password.errors.maxlength">
+              Password cannot exceed 32 characters.
+            </div>
+          </div>
+
+          <div *ngIf="first_name.invalid && (first_name.dirty || first_name.touched || submitted)" class="errorText">
+            <div *ngIf="first_name.errors.required">
+              First Name is required.
+            </div>
+          </div>
+
+          <div *ngIf="last_name.invalid && (last_name.dirty || last_name.touched || submitted)" class="errorText">
+            <div *ngIf="last_name.errors.required">
+              Last Name is required.
+            </div>
+          </div>
+
+          <div *ngIf="birth_date.invalid && (birth_date.dirty || birth_date.touched || submitted)" class="errorText">
+            <div *ngIf="birth_date.errors.required">
+              Birth Date is required.
+            </div>
+          </div>
+
+          <div *ngIf="gender.invalid && (gender.dirty || gender.touched || submitted)" class="errorText">
+            <div *ngIf="gender.errors.required">
+              Gender is required.
+            </div>
+          </div>
+
+          <div *ngIf="faculty.invalid && (faculty.dirty || faculty.touched || submitted)" class="errorText">
+            <div *ngIf="faculty.errors.required">
+              Faculty is required.
+            </div>
+          </div>
+
+          <div *ngIf="major.invalid && (major.dirty || major.touched || submitted)" class="errorText">
+            <div *ngIf="major.errors.required">
+              Major is required.
+            </div>
+          </div>
+
+          <div *ngIf="registerErrorMessage" class="errorText">
+            {{registerErrorMessage}}
+          </div>
+
+        </div>
+
+        <ion-list>
+          <ion-item>
+            <ion-label fixed>Email</ion-label>
+            <ion-input type="email" id="email" name="email" [(ngModel)]="user.email" minlength="4" required="true"
+              #email="ngModel"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label fixed>First Name</ion-label>
+            <ion-input type="text" id="first_name" name="first_name" [(ngModel)]="user.first_name" required="true"
+              #first_name="ngModel"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label fixed>Last Name</ion-label>
+            <ion-input type="text" id="last_name" name="last_name" [(ngModel)]="user.last_name" required="true"
+              #last_name="ngModel"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label fixed>Password</ion-label>
+            <ion-input type="password" id="password" name="password" [(ngModel)]="user.password" minlength="4"
+              maxlength="32" required="true" #password="ngModel"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label fixed>Birth Date</ion-label>
+            <ion-input type="Date" id="birth_date" name="birth_date" [(ngModel)]="user.birth_date" required="true"
+              #birth_date="ngModel"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label fixed>Gender</ion-label>
+            <ion-select id="gender" name="gender" [(ngModel)]="genderSelected" required="true" #gender="ngModel"
+              multiple="false">
+              <ion-select-option *ngFor="let item of genderTypes" value="{{item}}">{{item}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item>
+            <ion-label fixed>Faculty</ion-label>
+            <ion-select id="faculty" name="faculty" [(ngModel)]="facultySelected" required="true" #faculty="ngModel">
+              <ion-select-option *ngFor="let item of facultyTypes" value="{{item}}">{{item}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item>
+            <ion-label fixed>Major</ion-label>
+            <ion-input type="text" id="major" name="major" [(ngModel)]="user.major" required="true" #major="ngModel">
+            </ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-button (click)="clear()">
+              Clear
+            </ion-button>
+            <ion-button type="submit" ion-button block>
+              Register
+            </ion-button>
+          </ion-item>
+
+        </ion-list>
+
+      </form>
+
+    </ion-card-content>
+
+  </ion-card>
+
+  <ion-card *ngIf="sessionService.getIsLogin() == true">
+
+    <ion-card-content>
+
+      You are registered and login as {{sessionService.getCurrentUser().first_name}}
+      {{sessionService.getCurrentUser().last_name}}
+
+    </ion-card-content>
+
+  </ion-card>
+
 </ion-content>
+
+<ion-footer *ngIf="sessionService.getIsLogin() == true">
+
+  <ion-toolbar>
+    <ion-button expand="full" (click)="userLogout()">
+      <ion-icon slot="start" name="exit"></ion-icon>
+      Logout
+    </ion-button>
+  </ion-toolbar>
+
+</ion-footer>

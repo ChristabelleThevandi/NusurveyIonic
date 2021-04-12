@@ -1,0 +1,107 @@
+<ion-header>
+
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="back()">
+        <ion-icon slot="start" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content>
+
+  <ion-card *ngIf="sessionService.getIsLogin() == false">
+
+    <ion-card-content>
+
+      <div *ngIf="loginError == true" style="color: red;">
+        {{errorMessage}}
+      </div>
+
+      <form #userLoginForm="ngForm" (ngSubmit)="userLogin(userLoginForm)">
+
+        <div style="color: red;">
+
+          <div *ngIf="inemail.invalid && (inemail.dirty || inemail.touched || submitted)" class="errorText">
+            <div *ngIf="inemail.errors.required">
+              Email is required.
+            </div>
+            <div *ngIf="inemail.errors.minlength">
+              Email must be at least 4 characters long.
+            </div>
+          </div>
+
+          <div *ngIf="inpassword.invalid && (inpassword.dirty || inpassword.touched || submitted)" class="errorText">
+            <div *ngIf="inpassword.errors.required">
+              Password is required.
+            </div>
+            <div *ngIf="inpassword.errors.minlength">
+              Password must be at least 4 characters long.
+            </div>
+            <div *ngIf="inpassword.errors.maxlength">
+              Password cannot exceed 32 characters.
+            </div>
+          </div>
+
+          <div *ngIf="loginErrorMessage" class="errorText">
+            {{loginErrorMessage}}
+          </div>
+
+        </div>
+
+        <ion-list>
+
+          <ion-item>
+            <ion-label fixed>Email</ion-label>
+            <ion-input type="email" id="email" name="email" [(ngModel)]="email" minlength="4"
+              required="true" #inemail="ngModel"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label fixed>Password</ion-label>
+            <ion-input type="password" id="password" name="password" [(ngModel)]="password" minlength="4" maxlength="32"
+              required="true" #inpassword="ngModel"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-button (click)="clear()">
+              Clear
+            </ion-button>
+            <ion-button type="submit" ion-button block>
+              Login
+            </ion-button>
+          </ion-item>
+
+        </ion-list>
+
+      </form>
+
+    </ion-card-content>
+
+  </ion-card>
+
+  <ion-card *ngIf="sessionService.getIsLogin() == true">
+
+    <ion-card-content>
+
+      You are login as {{sessionService.getCurrentUser().first_name}} {{sessionService.getCurrentUser().last_name}}
+
+    </ion-card-content>
+
+  </ion-card>
+
+</ion-content>
+
+<ion-footer *ngIf="sessionService.getIsLogin() == true">
+
+  <ion-toolbar>
+    <ion-button expand="full" (click)="userLogout()">
+      <ion-icon slot="start" name="exit"></ion-icon>
+      Logout
+    </ion-button>
+  </ion-toolbar>
+
+</ion-footer>
