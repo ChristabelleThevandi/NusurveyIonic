@@ -1,7 +1,7 @@
 import { CheckboxAnswer } from "./checkbox-answer";
 import { MultipleChoiceAnswer } from "./multiple-choice-answer";
 import { QuestionWrapper } from "./question-wrapper";
-import { Response } from "./response";
+import { SurveyResponse } from "./surveyResponse";
 import { SliderAnswer } from "./slider-answer";
 import { TextAnswer } from "./text-answer";
 
@@ -12,7 +12,7 @@ export class AnswerWrapper {
     multipleChoiceAnswer: MultipleChoiceAnswer | undefined;
     sliderAnswer: SliderAnswer | undefined;
     textAnswer: TextAnswer | undefined;
-    response: Response | undefined;
+    surveyResponse: SurveyResponse | undefined;
 
     constructor(id?: number, questionWrapper?: QuestionWrapper, checkboxAnswer?: CheckboxAnswer, multipleChoiceAnswer?: MultipleChoiceAnswer,
         sliderAnswer?: SliderAnswer, textAnswer?: TextAnswer) {

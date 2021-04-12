@@ -1,7 +1,7 @@
 import { User } from "./user";
 import { Tag } from "./tag";
 import { QuestionWrapper } from "./question-wrapper";
-import { Response } from "./response";
+import { SurveyResponse } from "./surveyResponse";
 import { FacultyType } from "./faculty-type.enum";
 import { Transaction } from "./transaction";
 
@@ -19,7 +19,7 @@ export class Survey {
     surveyees: User[] | undefined;
     tags : Tag[] | undefined;
     questionWrappers : QuestionWrapper[] | undefined;
-    responses : Response[] | undefined;
+    SurveyResponse : SurveyResponse[] | undefined;
     faculties : FacultyType[] | undefined;
     transactions : Transaction[] | undefined;
 

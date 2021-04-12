@@ -2,7 +2,7 @@ import { AnswerWrapper } from "./answer-wrapper";
 import { Survey } from "./survey";
 import { User } from "./user";
 
-export class Response {
+export class SurveyResponse {
     id : number | undefined;
     answerWrappers : AnswerWrapper[] | undefined;
     survey : Survey | undefined;

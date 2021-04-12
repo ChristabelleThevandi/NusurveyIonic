@@ -1,7 +1,7 @@
 import { CreditCard } from "./credit-card";
 import { FacultyType } from "./faculty-type.enum";
 import { GenderType } from "./gender-type.enum";
-import { Response } from "./response";
+import { SurveyResponse } from "./surveyResponse";
 import { Survey } from "./survey";
 import { Tag } from "./tag";
 import { Transaction } from "./transaction";
@@ -25,7 +25,7 @@ export class User {
     tags: Tag[] | undefined;
     creditCard: CreditCard | undefined;
     transactions: Transaction[] | undefined;
-    responses: Response[] | undefined;
+    surveyResponses: SurveyResponse[] | undefined;
 
     constructor(userId?: number, first_name?: string, last_name?: string, birth_date?: Date, email?: string, password?: string, faculty?: FacultyType, major?: string, gender?: GenderType) {
         this.incentive = 5.0;
