@@ -5,6 +5,7 @@ import { catchError } from 'rxjs/operators';
 
 import { SessionService } from '../services/session.service';
 import { User } from '../models/user';
+import { LoginReq } from '../models/login-req';
 
 
 
@@ -29,10 +30,12 @@ export class UserService {
 
 
 	userLogin(username: string | undefined, password: string | undefined): Observable<User> {
-		return this.httpClient.get<User>(this.baseUrl + "/userLogin?username=" + username + "&password=" + password).pipe
-			(
-				catchError(this.handleError)
-			);
+		let url = "/login";
+		let loginReq : LoginReq = new LoginReq(username,password);
+		return this.httpClient.post<User>(this.baseUrl + url, loginReq, httpOptions).pipe
+		(
+			catchError(this.handleError)
+		);
 	}
 
 	userRegister(user: User | undefined): Observable<number> {

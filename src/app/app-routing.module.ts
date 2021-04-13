@@ -5,7 +5,7 @@ import { AuthGuard } from './guards/auth.guard';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'index',
+    redirectTo: '/index',
     pathMatch: 'full'
   },
   {
@@ -31,6 +31,10 @@ const routes: Routes = [
   },
   {
     path: 'survey-description',
+    loadChildren: () => import('./survey-description/survey-description.module').then( m => m.SurveyDescriptionPageModule)
+  },
+  {
+    path: 'survey-description/:surveyId',
     loadChildren: () => import('./survey-description/survey-description.module').then( m => m.SurveyDescriptionPageModule)
   },
   {

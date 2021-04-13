@@ -1,9 +1,67 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>SurveyDescription</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="back()">
+        <ion-icon slot="start" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      Survey Details
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-card *ngIf="retrieveSurveyError == false && surveyToView != null">
+    <ion-card-header>
+      <ion-card-title>{{surveyToView.title}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>{{surveyToView.description}}</p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="retrieveSurveyError == false && surveyToView != null">
+    <ion-card-content>
+      <p>Created by {{surveyToView.creator.first_name}} {{surveyToView.creator.last_name}}</p>
+      <p>Earn ${{surveyToView.reward}} by filling this survey!</p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="retrieveSurveyError == false && surveyToView != null">
+    <ion-card-header>
+      <ion-card-title>Relevant Tags:</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item expand="full" *ngFor="let tag of surveyToView.tags">
+          {{tag.tag_name}}
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+  
+  <ion-card *ngIf="retrieveSurveyError == false && surveyToView != null">
+    <ion-card-header>
+      <ion-card-title>Faculties Allowed:</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item expand="full" *ngFor="let faculty of surveyToView.faculties">
+          {{faculty}}
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-button expand="full" (click)="answerSurvey($event, survey)">
+    Start Answering
+  </ion-button>
 
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-title>&copy; 2021 IS3106.</ion-title>
+  </ion-toolbar>
+</ion-footer>

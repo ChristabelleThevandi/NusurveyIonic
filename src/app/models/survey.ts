@@ -14,7 +14,6 @@ export class Survey {
     max_surveyees : number | undefined;
     price_per_response : 0.1;
     reward : number | undefined;
-
     creator : User | undefined;
     surveyees: User[] | undefined;
     tags : Tag[] | undefined;

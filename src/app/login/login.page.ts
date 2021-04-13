@@ -37,6 +37,9 @@ export class LoginPage implements OnInit {
     this.submitted = true;
 
     if (userLoginForm.valid) {
+
+      
+
       this.sessionService.setEmail(this.email);
       this.sessionService.setPassword(this.password);
 
@@ -48,6 +51,7 @@ export class LoginPage implements OnInit {
             this.sessionService.setIsLogin(true);
             this.sessionService.setCurrentUser(user);
             this.loginError = false;
+            this.router.navigate(["/index"]);
           }
           else {
             this.loginError = true;

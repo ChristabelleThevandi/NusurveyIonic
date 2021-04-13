@@ -26,6 +26,17 @@
       <p>Surveys here</p>
     </ion-card-content>
   </ion-card>
+
+  <ion-list *ngIf="sessionService.getIsLogin() == true">
+    <ion-button expand="full" *ngFor="let survey of recommendedSurveys" class="surveyButton"  (click)="viewSurveyDetails($event, survey)" style="text-transform:none!important;white-space: pre-line;">
+      {{survey.title}}
+      <br /><br />
+      Created by {{survey.creator.first_name}} {{survey.creator.last_name}} 
+      <br /><br />
+      Earn ${{survey.reward}}
+    </ion-button>
+  </ion-list>
+
 </ion-content>
 
 <ion-footer>
