@@ -40,7 +40,7 @@
       </ion-list>
     </ion-card-content>
   </ion-card>
-  
+
   <ion-card *ngIf="retrieveSurveyError == false && surveyToView != null">
     <ion-card-header>
       <ion-card-title>Faculties Allowed:</ion-card-title>
@@ -54,9 +54,13 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-button expand="full" (click)="answerSurvey($event, survey)">
-    Start Answering
-  </ion-button>
+  <ion-card *ngIf="retrieveSurveyError == false && surveyToView != null">
+    <ion-card-content>
+      <ion-button expand="full" (click)="answerSurvey()">
+        Start Answering
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
 
 </ion-content>
 

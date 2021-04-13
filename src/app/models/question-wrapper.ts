@@ -15,7 +15,7 @@ export class QuestionWrapper {
     checkbox : CheckboxOption[] | undefined;
     survey : Survey | undefined;
     tempId : number | undefined;
-    answerWrapper : AnswerWrapper | undefined;
+    answerWrapper : AnswerWrapper[] | undefined;
 
     constructor(id?: number) {
         this.id = id;

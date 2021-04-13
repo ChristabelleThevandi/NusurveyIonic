@@ -50,6 +50,10 @@ const routes: Routes = [
     loadChildren: () => import('./survey-page/survey-page.module').then( m => m.SurveyPagePageModule)
   },
   {
+    path: 'survey-page/:surveyId',
+    loadChildren: () => import('./survey-page/survey-page.module').then( m => m.SurveyPagePageModule)
+  },
+  {
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   },

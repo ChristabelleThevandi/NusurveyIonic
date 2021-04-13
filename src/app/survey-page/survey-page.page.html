@@ -1,9 +1,40 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>SurveyPage</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="back()">
+        <ion-icon slot="start" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      Answer Survey
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <form *ngIf="retrieveSurveyError == false && surveyToView != null" #answerSurveyForm="ngForm"
+    (ngSubmit)="update(answerSurveyForm)">
+    <ion-card *ngIf="retrieveSurveyError == false && surveyToView != null">
+      <ion-list lines="full">
+        <ion-item expand="full" *ngFor="let questionWrapper of surveyToView.questionWrappers">
+          {{questionWrapper.question.title}}
+          <ion-list *ngIf="questionWrapper.question.mcq" lines="full">
+            <ion-radio-group [(ngModel)]="questionWrapper.answerWrapper.multipleChoiceAnswer.optionChosen">
+              <ion-item *ngFor="let option of questionWrapper.mcq">
+                <ion-label>{{option.content}}</ion-label>
+                <ion-radio slot="start" value="{{option}}" (ionSelect)="select(option)">
+                </ion-radio>
+              </ion-item>
+            </ion-radio-group>
+          </ion-list>
+        </ion-item>
+      </ion-list>
+    </ion-card>
+  </form>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-title>&copy; 2021 IS3106.</ion-title>
+  </ion-toolbar>
+</ion-footer>

@@ -50,6 +50,10 @@ export class SurveyDescriptionPage implements OnInit {
     );
   }
 
+  answerSurvey() {
+    this.router.navigate(["/survey-page/" + this.surveyToView.surveyId]);
+  }
+
   back() {
     this.router.navigate(["/index"]);
   }
