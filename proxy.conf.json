@@ -1,6 +1,6 @@
 {
 	"/api": {
-		"target": "http://localhost:8080/NusurveyIonic/Resources",
+		"target": "http://localhost:8080/NusurveyRws/Resources",
 		"secure": false,
 		"pathRewrite": {
 		  "^/api": ""
