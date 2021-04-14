@@ -22,7 +22,7 @@ export class AppComponent {
   public appPagesProfile = [
     {
       title: 'My Profile',
-      url: '/viewProfile',
+      url: '/view-profile',
       icon: 'add-circle'
     },
     {

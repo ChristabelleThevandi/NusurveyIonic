@@ -1,9 +1,46 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>ViewProfile</ion-title>
-  </ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-button (click)="back()">
+				<ion-icon slot="start" name="arrow-back"></ion-icon>
+			</ion-button>
+		</ion-buttons>
+		<ion-title>View Profile</ion-title>
+	</ion-toolbar>
+
 </ion-header>
 
-<ion-content>
+<ion-content>	<ion-list *ngIf="user != undefined">
 
+  <ion-item>
+    <ion-label><b>First Name: </b></ion-label>
+    {{user.first_name}}
+  </ion-item>
+
+  <ion-item>
+    <ion-label><b>Last Name: </b></ion-label>
+    {{user.last_name}}
+  </ion-item>
+
+  <ion-item>
+    <ion-label><b>Gender: </b></ion-label>
+    {{user.gender}}
+  </ion-item>
+
+  <ion-item>
+    <ion-label><b>Faculty: </b></ion-label>
+    {{user.faculty}}
+  </ion-item>
+
+  <ion-item>
+    <ion-label><b>Major: </b></ion-label>
+    {{user.major}}
+  </ion-item>
+
+  <ion-item>
+    <ion-label><b>Birth Date: </b></ion-label>
+    {{user.birth_date}}
+  </ion-item>
+
+</ion-list>
 </ion-content>

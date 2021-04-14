@@ -48,6 +48,13 @@ export class UserService {
 			);
 	}
 
+	updateProfile(user: User | undefined) : Observable<string> {
+		let url = "/updateProfile"
+		return this.httpClient.post<string>(this.baseUrl + url, user, httpOptions).pipe(
+			catchError(this.handleError)
+		);
+	}
+
 	private handleError(error: HttpErrorResponse) {
 		let errorMessage: string = "";
 
