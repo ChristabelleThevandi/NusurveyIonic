@@ -100,4 +100,20 @@
 		</ion-card-content>
 	</ion-card>
 
+  <ion-label><b> Tags</b></ion-label>
+  <ion-list>
+    <ion-item expand="full" *ngFor="let tag of tags">  
+      {{tag.tag_name}}
+    </ion-item>
+  </ion-list>
+
+  <ion-card style="text-align: center;" *ngIf="user != undefined">
+		<ion-card-content>
+			<ion-button (click)="updateTag()">
+				<ion-icon slot="start" name="create"></ion-icon>
+				Update Tags
+			</ion-button>
+		</ion-card-content>
+	</ion-card>
+
 </ion-content>

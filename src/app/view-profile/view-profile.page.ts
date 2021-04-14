@@ -4,6 +4,7 @@ import { UserService } from '../services/user.service';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { User } from '../models/user';
+import { Tag } from '../models/tag';
 import { CreditCard } from '../models/credit-card';
 import { CreditCardService } from '../services/credit-card.service';
 
@@ -19,6 +20,7 @@ export class ViewProfilePage implements OnInit {
   resultSuccess : boolean;
   resultError : boolean;
   message : string;
+  tags:Tag[];
 
   constructor(private router: Router, private userService: UserService, public sessionService: SessionService, public alertController: AlertController,
     private creditCardService: CreditCardService) { 
@@ -26,7 +28,7 @@ export class ViewProfilePage implements OnInit {
     this.resultError = false;
     this.resultSuccess = false;
     this.user = this.sessionService.getCurrentUser();
-    
+    this.tags = this.user.tags;
   }
 
   ngOnInit() {
@@ -56,6 +58,10 @@ export class ViewProfilePage implements OnInit {
 
   updateCreditCard() {
     this.router.navigate(["/update-credit-card"])
+  }
+
+  updateTag() {
+    this.router.navigate(["/update-tag"])
   }
 
   async deleteCreditCard() {
