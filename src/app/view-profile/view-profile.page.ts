@@ -39,6 +39,10 @@ export class ViewProfilePage implements OnInit {
     } else {
       this.hasCreditCard = false;
     }
+    if (this.user.tags != undefined)
+    {
+      this.tags = this.user.tags;
+    }
   }
 
   ionViewWillEnter() {
@@ -49,6 +53,10 @@ export class ViewProfilePage implements OnInit {
       this.creditCard = this.user.creditCard;
     } else {
       this.hasCreditCard = false;
+    }
+    if (this.user.tags != undefined)
+    {
+      this.tags = this.user.tags;
     }
   }
 

@@ -23,6 +23,7 @@ export class TagService {
 	updateTag(updateTagReq: UpdateTagReq): Observable<any> {
 		let url = "/updateTag"
 		console.log("calling update tag method");
+		console.log(updateTagReq);
 		return this.httpClient.post<any>(this.baseUrl1 + url, updateTagReq, httpOptions).pipe(
 			catchError(this.handleError)
 		);

@@ -15,9 +15,8 @@
 	<ion-item>
 		<ion-item>
             <ion-label fixed>Tags</ion-label>
-            <ion-select *ngFor="let tag of original_Tags; let i = index" id="tagId" name="tag_name" [(ngModel)]="selected_Tags[i]" required="true" #selected_Tags="ngModel"
-              multiple="true">
-              <ion-select-option *ngFor="let tag of original_Tags; let i = index" value="{{original_Tags[i].tag_name}}">{{original_Tags[i].tag_name}}</ion-select-option>
+            <ion-select [(ngModel)]="selected_Tags" multiple="true">
+              <ion-select-option *ngFor="let tag of original_Tags" [value]="tag.name">{{tag.tag_name}}</ion-select-option>
             </ion-select>
           </ion-item>
 
