@@ -7,7 +7,7 @@ import { Survey } from "./survey";
 import { TextOption } from "./text-option";
 
 export class QuestionWrapper {
-    id : number | undefined;
+ //   id : number | undefined;
     question : Question | undefined;
     mcq : MultipleChoiceOption[] | undefined;
     text : TextOption | undefined;
@@ -15,9 +15,9 @@ export class QuestionWrapper {
     checkbox : CheckboxOption[] | undefined;
     survey : Survey | undefined;
     tempId : number | undefined;
-    answerWrapper : AnswerWrapper[] | undefined;
+    answerWrappers : AnswerWrapper[] | undefined;
 
-    constructor(id?: number) {
-        this.id = id;
+    constructor() {
+       // this.id = id;
     }
 }

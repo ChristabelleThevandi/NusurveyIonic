@@ -40,8 +40,6 @@ export class UserService {
 
 	userRegister(user: User | undefined): Observable<number> {
 		let url = "/register"
-		console.log(this.baseUrl + url);
-		console.log(user);
 		return this.httpClient.put<number>(this.baseUrl + url, user, httpOptions).pipe
 			(
 				catchError(this.handleError)

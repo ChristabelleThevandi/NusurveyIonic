@@ -108,7 +108,6 @@ export class RegisterPage implements OnInit {
         this.user.faculty = "USP";
       }
 
-      this.user.faculty = undefined;
       this.userService.userRegister(this.user).subscribe(
         response => {
           let userId: number = response;
