@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { SessionService } from '../services/session.service';
 import { Router } from '@angular/router';
-import { NgForm } from '@angular/forms';
 import { Survey } from '../models/survey';
 import { SurveyService } from '../services/survey.service';
+import { User } from '../models/user';
+import { FacultyType } from '../models/faculty-type.enum';
 
 @Component({
   selector: 'app-index',
@@ -13,10 +14,14 @@ import { SurveyService } from '../services/survey.service';
 export class IndexPage implements OnInit {
   submitted: boolean;
   recommendedSurveys: Survey[];
+  originalSurveys: Survey[];
+  user : User;
+
 
   constructor(private router: Router,
     public sessionService: SessionService, public surveyService: SurveyService) {
     this.submitted = false;
+    this.user = this.sessionService.getCurrentUser();
   }
 
   ngOnInit() {
@@ -32,12 +37,30 @@ export class IndexPage implements OnInit {
       this.surveyService.getRecommendation(this.sessionService.getCurrentUser()).subscribe(
         response => {
           this.recommendedSurveys = response;
+          this.originalSurveys = response;
         },
         error => {
           console.log("**************************** IndexPage.ts: " + error);
         }
       );
     }
+  }
+
+  searchSurveysByTitle(event: any) {
+    this.recommendedSurveys = this.originalSurveys;
+    const val = event.target.value;
+    console.log(val);
+
+    if(val && val.trim() !== '') {
+      this.recommendedSurveys = this.recommendedSurveys.filter((survey) => {
+        return (survey.title.toLowerCase().indexOf(val.toLowerCase()) > -1);
+      })
+    }
+  }
+
+  sortByDateAsc() {
+    this.recommendedSurveys = this.originalSurveys;
+    this.recommendedSurveys.reverse();
   }
 
   viewSurveyDetails(event, survey) {

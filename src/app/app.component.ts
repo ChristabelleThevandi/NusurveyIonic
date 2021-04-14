@@ -27,12 +27,12 @@ export class AppComponent {
     },
     {
       title: 'My Transactions',
-      url: '/viewTransactions',
+      url: '/view-transactions',
       icon: 'list-circle'
     },
     {
       title: 'My Filled Surveys',
-      url: '/viewViewFilledSurveys',
+      url: '/view-filled-surveys',
       icon: 'list-circle'
     }
   ];
