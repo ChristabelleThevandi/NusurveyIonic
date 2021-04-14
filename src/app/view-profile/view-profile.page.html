@@ -10,37 +10,94 @@
 
 </ion-header>
 
-<ion-content>	<ion-list *ngIf="user != undefined">
+<ion-content>	
+  <ion-list *ngIf="user != undefined">
+    <ion-item>
+      <ion-label><b>First Name: </b></ion-label>
+      {{user.first_name}}
+    </ion-item>
 
-  <ion-item>
-    <ion-label><b>First Name: </b></ion-label>
-    {{user.first_name}}
-  </ion-item>
+    <ion-item>
+      <ion-label><b>Last Name: </b></ion-label>
+      {{user.last_name}}
+    </ion-item>
 
-  <ion-item>
-    <ion-label><b>Last Name: </b></ion-label>
-    {{user.last_name}}
-  </ion-item>
+    <ion-item>
+      <ion-label><b>Gender: </b></ion-label>
+      {{user.gender}}
+    </ion-item>
 
-  <ion-item>
-    <ion-label><b>Gender: </b></ion-label>
-    {{user.gender}}
-  </ion-item>
+    <ion-item>
+      <ion-label><b>Faculty: </b></ion-label>
+      {{user.faculty}}
+    </ion-item>
 
-  <ion-item>
-    <ion-label><b>Faculty: </b></ion-label>
-    {{user.faculty}}
-  </ion-item>
+    <ion-item>
+      <ion-label><b>Major: </b></ion-label>
+      {{user.major}}
+    </ion-item>
 
-  <ion-item>
-    <ion-label><b>Major: </b></ion-label>
-    {{user.major}}
-  </ion-item>
+    <ion-item>
+      <ion-label><b>Birth Date: </b></ion-label>
+      {{user.birth_date}}
+    </ion-item>
+  </ion-list>
 
-  <ion-item>
-    <ion-label><b>Birth Date: </b></ion-label>
-    {{user.birth_date}}
-  </ion-item>
+  <ion-card style="text-align: center;" *ngIf="user != undefined">
+		<ion-card-content>
+			<ion-button (click)="updateProfile()">
+				<ion-icon slot="start" name="create"></ion-icon>
+				Update Profile
+			</ion-button>
+		</ion-card-content>
+	</ion-card>
 
-</ion-list>
+  <div *ngIf="resultSuccess == true" style="color: blue;">
+    {{message}}
+  </div>
+
+  <div *ngIf="resultError == true" style="color: red;">
+    {{message}}
+  </div>
+
+  <ion-list *ngIf="hasCreditCard">
+    <ion-item>
+      <ion-label><b>Name on Card: </b></ion-label>
+      {{creditCard.name}}
+    </ion-item>
+
+    <ion-item>
+      <ion-label><b>Card Number: </b></ion-label>
+      {{creditCard.card_number}}
+    </ion-item>
+
+    <ion-item>
+      <ion-label><b>CVV: </b></ion-label>
+      {{creditCard.cvv}}
+    </ion-item>
+
+    <ion-item>
+      <ion-label><b>Expiry Date: </b></ion-label>
+      {{creditCard.expiry_date}}
+    </ion-item>
+  </ion-list>
+
+  <ion-card style="text-align: center;" *ngIf="hasCreditCard">
+		<ion-card-content>
+			<ion-button (click)="deleteCreditCard()">
+				<ion-icon slot="start" name="create"></ion-icon>
+				Delete Credit Card
+			</ion-button>
+		</ion-card-content>
+	</ion-card>
+
+  <ion-card style="text-align: center;" *ngIf="!hasCreditCard">
+		<ion-card-content>
+			<ion-button (click)="updateCreditCard()">
+				<ion-icon slot="start" name="create"></ion-icon>
+				Add Credit Card
+			</ion-button>
+		</ion-card-content>
+	</ion-card>
+
 </ion-content>

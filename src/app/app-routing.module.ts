@@ -60,7 +60,11 @@ const routes: Routes = [
   {
     path: 'update-profile',
     loadChildren: () => import('./update-profile/update-profile.module').then( m => m.UpdateProfilePageModule)
+  },  {
+    path: 'update-credit-card',
+    loadChildren: () => import('./update-credit-card/update-credit-card.module').then( m => m.UpdateCreditCardPageModule)
   },
+
 
 
 ];

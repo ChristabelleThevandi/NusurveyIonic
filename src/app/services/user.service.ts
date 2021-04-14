@@ -32,6 +32,7 @@ export class UserService {
 	userLogin(username: string | undefined, password: string | undefined): Observable<User> {
 		let url = "/login";
 		let loginReq : LoginReq = new LoginReq(username,password);
+		console.log(loginReq);
 		return this.httpClient.post<User>(this.baseUrl + url, loginReq, httpOptions).pipe
 		(
 			catchError(this.handleError)
@@ -48,9 +49,11 @@ export class UserService {
 			);
 	}
 
-	updateProfile(user: User | undefined) : Observable<string> {
+	updateProfile(user: User | undefined) : Observable<any> {
 		let url = "/updateProfile"
-		return this.httpClient.post<string>(this.baseUrl + url, user, httpOptions).pipe(
+		console.log("Masuk sini");
+		console.log(user);
+		return this.httpClient.post<any>(this.baseUrl + url, user, httpOptions).pipe(
 			catchError(this.handleError)
 		);
 	}

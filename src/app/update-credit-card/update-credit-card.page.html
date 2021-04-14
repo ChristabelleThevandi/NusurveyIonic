@@ -1,0 +1,96 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="back()">
+        <ion-icon slot="start" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Add Credit Card</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form *ngIf="user != null" #updateCreditCardForm="ngForm" (ngSubmit)="updateCreditCard(updateCreditCardForm)">
+    <ion-card>
+      <ion-card-content>
+        <div *ngIf="successResponse == true" style="color: blue;">
+          {{errorMessage}}
+        </div>
+
+        <div *ngIf="errorResponse == true" style="color:red;">
+          {{errorMessage}}
+        </div>
+
+        <div style="color: red;">
+
+          <div *ngIf="name != null && name.invalid && (name.dirty || name.touched || submitted)" class="errorText">
+            <div *ngIf="name.errors.required">
+              Name On Card is required.
+            </div>
+          </div>
+
+          <div *ngIf="card_number != null && card_number.invalid && (card_number.dirty || card_number.touched || submitted)" class="errorText">
+            <div *ngIf="card_number.errors.required">
+              Card Number is required.
+            </div>
+            <div *ngIf="card_number.errors.minlength">
+              Card Number must be at least 6 characters long.
+            </div>
+            <div *ngIf="card_number != null && card_number.errors.maxlength">
+              Card Number cannot exceed 20 characters.
+            </div>
+          </div>
+
+          <div *ngIf="cvv != null && cvv.invalid && (cvv.dirty || cvv.touched || submitted)" class="errorText">
+            <div *ngIf="cvv.errors.required">
+               CVV is required.
+            </div>
+          </div>
+
+          <div *ngIf="expiry_date != null && expiry_date.invalid && (expiry_date.dirty || expiry_date.touched || submitted)" class="errorText">
+            <div *ngIf="expiry_date.errors.required">
+              Expiry Date is required.
+            </div>
+          </div>
+        </div>
+
+        <ion-list>
+          <ion-item>
+            <ion-label fixed>Name On Card</ion-label>
+            <ion-input type="text" id="name" name="name" [(ngModel)]="creditcard.name" required="true"
+              #name="ngModel"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label fixed>Card Number</ion-label>
+            <ion-input type="text" id="card_number" name="card_number" [(ngModel)]="creditcard.card_number" required="true"
+              #card_name="ngModel"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label fixed>CVV</ion-label>
+            <ion-input type="text" id="cvv" name="cvv" placeholder = "123" [(ngModel)]="creditcard.cvv" minlength="3" maxlength="3" required="true"
+              #cvv="ngModel"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label fixed>Expiry Date</ion-label>
+            <ion-input type="Date" id="expiry_date" name="expiry_date" [(ngModel)]="expiry_date" required="true"
+              #expiry_name="ngModel"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-button (click)="clear()">
+              Clear
+            </ion-button>
+            <ion-button type="submit" ion-button block>
+              Add Credit Card
+            </ion-button>
+          </ion-item>
+
+        </ion-list>
+
+      </ion-card-content>
+    </ion-card>
+  </form>
+</ion-content>

@@ -1,9 +1,82 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>UpdateProfile</ion-title>
-  </ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-button (click)="back()">
+				<ion-icon slot="start" name="arrow-back"></ion-icon>
+			</ion-button>
+		</ion-buttons>
+		<ion-title>Update Your Profile</ion-title>
+	</ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <form *ngIf="user != null" #updateProfileForm="ngForm"
+    (ngSubmit)="updateProfile(updateProfileForm)">
 
+    <ion-card>
+
+      <ion-card-content>
+        <div *ngIf="resultSuccess == true" style="color: blue;">
+          {{message}}
+        </div>
+
+        <div *ngIf="resultError == true" style="color: red;">
+          {{message}}
+        </div>
+
+        <div style="color: red;">
+          <div *ngIf="first_name.invalid && (first_name.dirty ||first_name.touched || submitted)" class="errorText">
+            <div *ngIf="first_name.errors.required">
+              first name is required.
+            </div>
+          </div>
+
+          <div *ngIf="last_name.invalid && (last_name.dirty || last_name.touched || submitted)" class="errorText">
+            <div *ngIf="last_name.errors.required">
+              last name is required.
+            </div>
+          </div>
+
+          <div *ngIf="gender.invalid && (gender.dirty || gender.touched || submitted)"
+            class="errorText">
+            <div *ngIf="gender.errors.required">
+              gender is required.
+            </div>
+          </div>
+        </div>
+
+        <ion-list>
+          <ion-item>
+            <ion-label fixed>First Name</ion-label>
+            <ion-input type="text" id="first_name" name="first_name" [(ngModel)]="userToUpdate.first_name" required="true"
+              #first_name="ngModel"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label fixed>Last Name</ion-label>
+            <ion-input type="text" id="last_name" name="last_name" [(ngModel)]="userToUpdate.last_name" required="true"
+              #last_name="ngModel"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label fixed>Gender</ion-label>
+            <ion-select id="gender" name="gender" [(ngModel)]="genderSelected" required="true" #gender="ngModel"
+              multiple="false">
+              <ion-select-option *ngFor="let item of genderTypes" value="{{item}}">{{item}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item>
+            <ion-button (click)="clear()">
+              Clear
+            </ion-button>
+            <ion-button type="submit" ion-button block>
+              Update
+            </ion-button>
+          </ion-item>
+
+        </ion-list>
+      </ion-card-content>
+      </ion-card>
+    </form>
 </ion-content>

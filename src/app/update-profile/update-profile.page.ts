@@ -19,29 +19,55 @@ export class UpdateProfilePage implements OnInit {
   message: string;
   user : User;
   userToUpdate : User;
+  genderTypes: string[];
+  genderSelected: string;
 
   constructor(private router: Router, public sessionService: SessionService, private userService: UserService) { 
-    this.user = this.sessionService.getCurrentUser();
+   
+    this.genderTypes = ["Female", "Male", "Other"];
     this.submitted = false;
     this.resultError = false;
     this.resultSuccess = false;
-    this.userToUpdate = new User();
   }
 
   ngOnInit() {
+    this.user = this.sessionService.getCurrentUser();
+    this.userToUpdate = new User();
+    this.userToUpdate.email = this.user.email;
+    this.userToUpdate.first_name = this.user.first_name;
+    this.userToUpdate.last_name = this.user.last_name;
+    this.genderSelected = this.user.gender;
   }
+
+  clear() {
+    this.userToUpdate = new User();
+  }
+
 
   updateProfile(updateProfileForm: NgForm)
   {
     this.submitted = true;
     if (updateProfileForm.valid)
     {
-      let message : string;
+      if (this.genderSelected === "Female") {
+        this.userToUpdate.gender = "FEMALE";
+      } else if(this.genderSelected === "Male") {
+        this.userToUpdate.gender = "MALE";
+      } else {
+        this.userToUpdate.gender = "OTHERS";
+      }
+
       this.userService.updateProfile(this.userToUpdate).subscribe(
         response => {
           this.resultSuccess = true;
           this.resultError = false;
-          this.message = "Updated profile successfully";
+          this.message = "Updated Profile";
+          this.user.first_name = this.userToUpdate.first_name;
+          this.user.last_name = this.userToUpdate.last_name;
+          this.user.gender = this.userToUpdate.gender;
+          this.sessionService.setCurrentUser(this.user);
+          console.log(this.user);
+          this.router.navigate(["/view-profile"])
         },
         error => {
           this.resultError = true;
