@@ -21,7 +21,7 @@
     "@angular/router": "~11.2.0",
     "@ionic/angular": "^5.5.2",
     "ionic-select-searchable": "^2.10.0",
-    "ionic-selectable": "^4.8.0",
+    "ionic-selectable": "^4.4.0",
     "router": "^1.3.5",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",

@@ -3,8 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { UpdateTagPage } from './update-tag.page';
 
-import { IonicSelectableModule } from 'ionic-selectable';
-
 const routes: Routes = [
   {
     path: '',
@@ -13,7 +11,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes),IonicSelectableModule],
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
 export class UpdateTagPageRoutingModule {}
