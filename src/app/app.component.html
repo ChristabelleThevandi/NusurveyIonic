@@ -2,7 +2,8 @@
   <ion-split-pane contentId="main-content">
     <ion-menu contentId="main-content" type="overlay">
       <ion-content>
-        <ion-list *ngIf="sessionService.getIsLogin()">        
+        <ion-list *ngIf="sessionService.getIsLogin()"> 
+          <ion-label style="margin: 10px;">Hi, {{sessionService.getCurrentUser().first_name}} {{sessionService.getCurrentUser().last_name}}</ion-label> 
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPagesLogin; let i = index">
             <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
               <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
