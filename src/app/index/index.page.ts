@@ -49,7 +49,6 @@ export class IndexPage implements OnInit {
   searchSurveysByTitle(event: any) {
     this.recommendedSurveys = this.originalSurveys;
     const val = event.target.value;
-    console.log(val);
 
     if(val && val.trim() !== '') {
       this.recommendedSurveys = this.recommendedSurveys.filter((survey) => {

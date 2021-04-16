@@ -17,10 +17,15 @@ export class ViewFilledSurveysPage implements OnInit {
 
   constructor(private router: Router,
     public sessionService: SessionService, public surveyService: SurveyService) {
-      this.user = this.sessionService.getCurrentUser();
+    this.user = this.sessionService.getCurrentUser();
   }
 
   ngOnInit() {
+    this.refreshFilledSurveys();
+  }
+
+  ionViewWillEnter() {
+    this.user = this.sessionService.getCurrentUser();
     this.refreshFilledSurveys();
   }
 

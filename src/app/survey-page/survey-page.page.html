@@ -33,13 +33,34 @@
                   </ion-item>
                 </ion-radio-group>
               </ion-list>
+              <ion-list *ngIf="questionWrapper.question.checkbox">
+                <ion-item *ngFor="let option of questionWrapper.checkbox">
+                  <ion-label>{{option.content}}</ion-label>
+                  <ion-checkbox slot="end" [(ngModel)]="option.isSelected" name="{{option}}"></ion-checkbox>
+                </ion-item>
+              </ion-list>
             </ion-row>
+            <ion-item *ngIf="questionWrapper.question.slider">
+              <ion-range min="{{questionWrapper.slider.minRange}}" max="{{questionWrapper.slider.maxRange}}" pin
+                [(ngModel)]="questionWrapper.answerWrappers[questionWrapper.answerWrappers.length-1].sliderAnswer.answerValue"
+                name="{{questionWrapper.answerWrappers[questionWrapper.answerWrappers.length-1].sliderAnswer}}">
+                <ion-label slot="start">{{questionWrapper.slider.minRange}}</ion-label>
+                <ion-label slot="end">{{questionWrapper.slider.maxRange}}</ion-label>
+              </ion-range>
+            </ion-item>
+            <div>
+              <ion-item *ngIf="questionWrapper.question.text">
+                <ion-label>{{questionWrapper.text.text}}</ion-label>
+                <ion-textarea placeholder="Enter more information here..." [(ngModel)]="questionWrapper.answerWrappers[questionWrapper.answerWrappers.length-1].textAnswer.answerText"
+                name="{{questionWrapper.answerWrappers[questionWrapper.answerWrappers.length-1].textAnswer}}"></ion-textarea>
+              </ion-item>
+            </div>
           </ion-grid>
         </ion-item>
       </ion-list>
     </ion-card>
 
-    <ion-button type="submit" ion-button block expand="full" style="text-transform:none!important; margin: 10px" >
+    <ion-button type="submit" ion-button block expand="full" style="text-transform:none!important; margin: 10px">
       Submit Answer
     </ion-button>
   </form>

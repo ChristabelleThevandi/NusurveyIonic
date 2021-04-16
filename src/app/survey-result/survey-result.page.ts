@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-survey-result',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SurveyResultPage implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router,public alertController: AlertController) { }
 
   ngOnInit() {
+  }
+
+  filledSurvey() {
+    this.router.navigate(["/view-filled-surveys"]);
+  }
+
+  answerSurvey() {
+    this.router.navigate(["/view-transactions"]);
   }
 
 }

@@ -61,7 +61,7 @@ export class SurveyPagePage implements OnInit {
       let answerWrapper = new AnswerWrapper();
       answerWrapper.questionWrapper = qw;
       qw.answerWrappers.push(answerWrapper);
-      if(qw.question.mcq) {
+      if (qw.question.mcq) {
         answerWrapper.multipleChoiceAnswer = new MultipleChoiceAnswer();
         answerWrapper.multipleChoiceAnswer.optionChosen = new MultipleChoiceOption();
         answerWrapper.multipleChoiceAnswer.answerWrapper = answerWrapper;
@@ -78,20 +78,6 @@ export class SurveyPagePage implements OnInit {
         answerWrapper.textAnswer.answerGiven = new TextOption();
         answerWrapper.textAnswer.answerWrapper = answerWrapper;
       }
-      // answerWrapper.multipleChoiceAnswer = new MultipleChoiceAnswer();
-      // answerWrapper.checkboxAnswer = new CheckboxAnswer();
-      // answerWrapper.sliderAnswer = new SliderAnswer();
-      // answerWrapper.textAnswer = new TextAnswer();
-
-      // answerWrapper.multipleChoiceAnswer.optionChosen = new MultipleChoiceOption();
-      // answerWrapper.sliderAnswer.optionGiven = new SliderOption();
-      // answerWrapper.textAnswer.answerGiven = new TextOption();
-      // answerWrapper.checkboxAnswer.optionsGiven = new Array();
-
-      // answerWrapper.multipleChoiceAnswer.answerWrapper = answerWrapper;
-      // answerWrapper.sliderAnswer.answerWrapper = answerWrapper;
-      // answerWrapper.checkboxAnswer.answerWrapper = answerWrapper;
-      // answerWrapper.textAnswer.answerWrapper = answerWrapper;
     }
   }
 
@@ -128,9 +114,21 @@ export class SurveyPagePage implements OnInit {
           }
         }
         aw.multipleChoiceAnswer.answerWrapper = null;
-        // aw.checkboxAnswer.answerWrapper = null;
-        // aw.sliderAnswer.answerWrapper = null;
-        // aw.textAnswer.answerWrapper = null;
+      } else if (aw.questionWrapper.question.checkbox) {
+        for (let checkboxOption of aw.questionWrapper.checkbox) {
+          if (checkboxOption.isSelected) {
+            aw.checkboxAnswer.optionsGiven.push(checkboxOption);
+          }
+          checkboxOption.isSelected = false;
+        }
+        aw.checkboxAnswer.numChecked = aw.checkboxAnswer.optionsGiven.length;
+        aw.checkboxAnswer.answerWrapper = null;
+      } else if (aw.questionWrapper.question.slider) {
+        aw.sliderAnswer.optionGiven = aw.questionWrapper.slider;
+        aw.sliderAnswer.answerWrapper = null;
+      } else if (aw.questionWrapper.question.text) {
+        aw.textAnswer.answerGiven = aw.questionWrapper.text;
+        aw.textAnswer.answerWrapper = null;
       }
       aw.questionWrapper = null;
     }
@@ -145,6 +143,7 @@ export class SurveyPagePage implements OnInit {
           this.resultError = false;
           this.message = response;
           this.message = "Response sent successfully";
+          this.router.navigate(["/survey-result"]);
         },
         error => {
           this.resultError = true;

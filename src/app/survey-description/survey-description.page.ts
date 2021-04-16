@@ -4,6 +4,7 @@ import { AlertController } from '@ionic/angular';
 import { Survey } from '../models/survey';
 import { SessionService } from '../services/session.service';
 import { SurveyService } from '../services/survey.service';
+import { User } from '../models/user';
 
 @Component({
   selector: 'app-survey-description',
@@ -18,6 +19,9 @@ export class SurveyDescriptionPage implements OnInit {
   error: boolean;
   errorMessage: string;
   resultSuccess: boolean;
+  filledSurveys: Survey[];
+  user: User;
+  hasFilled: boolean;
 
   constructor(private router: Router,
     public sessionService: SessionService, public surveyService: SurveyService, public alertController: AlertController, private activatedRoute: ActivatedRoute) {
@@ -25,6 +29,8 @@ export class SurveyDescriptionPage implements OnInit {
     this.retrieveSurveyError = false;
     this.error = false;
     this.resultSuccess = false;
+    this.user = this.sessionService.getCurrentUser();
+    this.hasFilled = false;
   }
 
   ngOnInit() {
@@ -34,6 +40,7 @@ export class SurveyDescriptionPage implements OnInit {
   }
 
   ionViewWillEnter() {
+    this.user = this.sessionService.getCurrentUser();
     this.refreshSurvey();
   }
 
@@ -41,7 +48,7 @@ export class SurveyDescriptionPage implements OnInit {
     this.surveyService.getSurveyBySurveyId(this.surveyId).subscribe(
       response => {
         this.surveyToView = response;
-        console.log(response);
+        this.checkHasFilled();
       },
       error => {
         this.retrieveSurveyError = true;
@@ -49,6 +56,20 @@ export class SurveyDescriptionPage implements OnInit {
       }
     );
   }
+
+checkHasFilled() {
+  this.surveyService.retrieveMyFilledSurveys(this.user.email).subscribe(
+    response => {
+      this.filledSurveys = response;
+      if(this.filledSurveys.includes(this.surveyToView))  {
+        this.hasFilled = true;
+      }
+    },
+    error => {
+      console.log("**************************** ViewFilledSurveys.ts: " + error);
+    }
+  );
+}
 
   answerSurvey() {
     this.router.navigate(["/survey-page/" + this.surveyToView.surveyId]);
