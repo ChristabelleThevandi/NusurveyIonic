@@ -13,7 +13,7 @@ export class User {
     birth_date: string | undefined;
     email: string | undefined;
     password: string | undefined;
-    faculty: FacultyType | undefined;
+    faculty: string | undefined;
     major: string | undefined;
     avatar: string | undefined;
     gender: string | undefined;
@@ -27,7 +27,7 @@ export class User {
     transactions: Transaction[] | undefined;
     surveyResponses: SurveyResponse[] | undefined;
 
-    constructor(first_name?: string, last_name?: string, birth_date?: string, email?: string, password?: string, faculty?: FacultyType, major?: string, gender?: string) {
+    constructor(first_name?: string, last_name?: string, birth_date?: string, email?: string, password?: string, faculty?: string, major?: string, gender?: string) {
         this.incentive = 5.0;
         this.milestone = 100.0;
         this.first_name = first_name;

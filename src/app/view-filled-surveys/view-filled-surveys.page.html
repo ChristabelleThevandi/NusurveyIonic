@@ -1,9 +1,24 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>ViewFilledSurveys</ion-title>
-  </ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-button (click)="back()">
+				<ion-icon slot="start" name="arrow-back"></ion-icon>
+			</ion-button>
+		</ion-buttons>
+		<ion-title>View My Filled Surveys</ion-title>
+	</ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <ion-list *ngIf="sessionService.getIsLogin() == true">
+    <ion-item expand="full" *ngFor="let survey of filledSurveys">
+      <br /><br />
+      {{survey.title}}
+      <br /><br />
+      Created by {{survey.creator.first_name}} {{survey.creator.last_name}} 
+      <br /><br />
+      Earn ${{survey.reward}}
+      <br /><br />
+    </ion-item>
+  </ion-list>
 </ion-content>

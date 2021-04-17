@@ -7,7 +7,7 @@ export class MultipleChoiceOption {
     tempId : number | undefined;
 
     questionWrapper : QuestionWrapper | undefined;
-    multipleChoiceAnswer : MultipleChoiceAnswer | undefined;
+    multipleChoiceAnswer : MultipleChoiceAnswer[] | undefined;
 
     constructor(content?: String) {
         this.content = content;

@@ -6,7 +6,7 @@ import { SliderAnswer } from "./slider-answer";
 import { TextAnswer } from "./text-answer";
 
 export class AnswerWrapper {
-    id: number | undefined;
+  //  id: number | undefined;
     questionWrapper: QuestionWrapper | undefined;
     checkboxAnswer: CheckboxAnswer | undefined;
     multipleChoiceAnswer: MultipleChoiceAnswer | undefined;
@@ -14,9 +14,9 @@ export class AnswerWrapper {
     textAnswer: TextAnswer | undefined;
     surveyResponse: SurveyResponse | undefined;
 
-    constructor(id?: number, questionWrapper?: QuestionWrapper, checkboxAnswer?: CheckboxAnswer, multipleChoiceAnswer?: MultipleChoiceAnswer,
+    constructor(questionWrapper?: QuestionWrapper, checkboxAnswer?: CheckboxAnswer, multipleChoiceAnswer?: MultipleChoiceAnswer,
         sliderAnswer?: SliderAnswer, textAnswer?: TextAnswer) {
-            this.id = id;
+           // this.id = id;
             this.questionWrapper = questionWrapper;
             this.checkboxAnswer = checkboxAnswer;
             this.multipleChoiceAnswer = multipleChoiceAnswer;

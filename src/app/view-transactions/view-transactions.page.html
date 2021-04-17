@@ -1,9 +1,24 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>ViewTransactions</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="back()">
+        <ion-icon slot="start" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>View My Transactions</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-list *ngIf="sessionService.getIsLogin() == true">
+    <ion-item expand="full" *ngFor="let transaction of transactions">
+      <ion-label>
+        <div><b>{{transaction.transName}}</b></div>
+        <div>Type: {{transaction.type}}</div>
+        <div>Date: {{transaction.transaction_date}}</div>
+        <div>Amount: {{transaction.amount}}</div>
+      </ion-label>
 
+    </ion-item>
+  </ion-list>
 </ion-content>

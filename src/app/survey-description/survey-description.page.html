@@ -54,11 +54,19 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-card *ngIf="retrieveSurveyError == false && surveyToView != null">
+  <ion-card *ngIf="retrieveSurveyError == false && surveyToView != null && hasFilled == false">
     <ion-card-content>
       <ion-button expand="full" (click)="answerSurvey()">
         Start Answering
       </ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="hasFilled == true">
+    <ion-card-content>
+      <ion-lable>
+        You have answered this survey!
+      </ion-lable>
     </ion-card-content>
   </ion-card>
 
