@@ -7,15 +7,21 @@ export class Transaction {
     transactionId : number | undefined;
     amount: number | undefined;
     transaction_date: string | undefined;
+    transName : string | undefined;
+    typeStr : string | undefined;
     
-    transactionType : TransactionType | undefined;
+    type : TransactionType | undefined;
     survey: Survey | undefined;
     user: User | undefined;
     creditCard: CreditCard | undefined;
 
     constructor()
     {
-
+        if(this.type === TransactionType.EXPENSE) {
+            this.typeStr = "EXPENSE";
+        } else {
+            this.typeStr = "INCOME";
+        }
     }
 }
 

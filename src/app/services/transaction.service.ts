@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { SessionService } from '../services/session.service';
-import { Survey } from '../models/survey';
+import { Transaction } from '../models/transaction';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { User } from '../models/user';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -13,34 +12,17 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root'
 })
-export class SurveyService {
-  baseUrl: string = "/api/User";
-  baseUrlSurvey: string = "/api/Survey";
+export class TransactionService {
+
+  baseUrl: string = "/api/Transaction";
 
   constructor(private httpClient: HttpClient,
     private sessionService: SessionService) {
   }
 
-  getRecommendation(user: User | undefined): Observable<Survey[]> {
-    let url = "/getRecommendation";
-    console.log(this.baseUrl + url);
-    return this.httpClient.post<Survey[]>(this.baseUrl + url, user, httpOptions).pipe
-      (
-        catchError(this.handleError)
-      );
-  }
-
-  getSurveyBySurveyId(surveyId: number | undefined): Observable<Survey> {
-    let url = "/retrieveSurveyBySurveyId";
-    return this.httpClient.get<Survey>(this.baseUrlSurvey + url + "/" + surveyId).pipe
-      (
-        catchError(this.handleError)
-      );
-  }
-
-  retrieveMyFilledSurveys(email: string | undefined): Observable<Survey[]> {
-    let url = "/retrieveMyFilledSurveys";
-    return this.httpClient.get<Survey[]>(this.baseUrlSurvey + url + "/" + email).pipe
+  retrieveAllTransactions(email: string | undefined): Observable<Transaction[]> {
+    let url = "/retrieveAllTransaction";
+    return this.httpClient.get<Transaction[]>(this.baseUrl + url + "/" + email).pipe
       (
         catchError(this.handleError)
       );
@@ -60,5 +42,4 @@ export class SurveyService {
 
     return throwError(errorMessage);
   }
-
 }

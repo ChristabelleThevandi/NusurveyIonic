@@ -15,21 +15,54 @@
   <form *ngIf="retrieveSurveyError == false && surveyToView != null" #answerSurveyForm="ngForm"
     (ngSubmit)="update(answerSurveyForm)">
     <ion-card *ngIf="retrieveSurveyError == false && surveyToView != null">
-      <ion-list lines="full">
-        <ion-item expand="full" *ngFor="let questionWrapper of surveyToView.questionWrappers">
-          {{questionWrapper.question.title}}
-          <ion-list *ngIf="questionWrapper.question.mcq" lines="full">
-            <ion-radio-group [(ngModel)]="questionWrapper.answerWrapper.multipleChoiceAnswer.optionChosen">
-              <ion-item *ngFor="let option of questionWrapper.mcq">
-                <ion-label>{{option.content}}</ion-label>
-                <ion-radio slot="start" value="{{option}}" (ionSelect)="select(option)">
-                </ion-radio>
+      <ion-list>
+        <ion-item *ngFor="let questionWrapper of surveyToView.questionWrappers">
+          <ion-grid>
+            <ion-row>
+              <ion-label>{{questionWrapper.question.title}}</ion-label>
+            </ion-row>
+            <ion-row>
+              <ion-list *ngIf="questionWrapper.question.mcq">
+                <ion-radio-group
+                  [(ngModel)]="questionWrapper.answerWrappers[questionWrapper.answerWrappers.length-1].multipleChoiceAnswer.optionChosenString"
+                  name="{{questionWrapper.answerWrappers[questionWrapper.answerWrappers.length-1].multipleChoiceAnswer}}">
+                  <ion-item *ngFor="let option of questionWrapper.mcq" lines="none">
+                    <ion-label>{{option.content}}</ion-label>
+                    <ion-radio slot="start" value="{{option.content}}" (ionSelect)="select(option)">
+                    </ion-radio>
+                  </ion-item>
+                </ion-radio-group>
+              </ion-list>
+              <ion-list *ngIf="questionWrapper.question.checkbox">
+                <ion-item *ngFor="let option of questionWrapper.checkbox">
+                  <ion-label>{{option.content}}</ion-label>
+                  <ion-checkbox slot="end" [(ngModel)]="option.isSelected" name="{{option}}"></ion-checkbox>
+                </ion-item>
+              </ion-list>
+            </ion-row>
+            <ion-item *ngIf="questionWrapper.question.slider">
+              <ion-range min="{{questionWrapper.slider.minRange}}" max="{{questionWrapper.slider.maxRange}}" pin
+                [(ngModel)]="questionWrapper.answerWrappers[questionWrapper.answerWrappers.length-1].sliderAnswer.answerValue"
+                name="{{questionWrapper.answerWrappers[questionWrapper.answerWrappers.length-1].sliderAnswer}}">
+                <ion-label slot="start">{{questionWrapper.slider.minRange}}</ion-label>
+                <ion-label slot="end">{{questionWrapper.slider.maxRange}}</ion-label>
+              </ion-range>
+            </ion-item>
+            <div>
+              <ion-item *ngIf="questionWrapper.question.text">
+                <ion-label>{{questionWrapper.text.text}}</ion-label>
+                <ion-textarea placeholder="Enter more information here..." [(ngModel)]="questionWrapper.answerWrappers[questionWrapper.answerWrappers.length-1].textAnswer.answerText"
+                name="{{questionWrapper.answerWrappers[questionWrapper.answerWrappers.length-1].textAnswer}}"></ion-textarea>
               </ion-item>
-            </ion-radio-group>
-          </ion-list>
+            </div>
+          </ion-grid>
         </ion-item>
       </ion-list>
     </ion-card>
+
+    <ion-button type="submit" ion-button block expand="full" style="text-transform:none!important; margin: 10px">
+      Submit Answer
+    </ion-button>
   </form>
 </ion-content>
 
