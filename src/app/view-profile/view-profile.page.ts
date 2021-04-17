@@ -21,6 +21,8 @@ export class ViewProfilePage implements OnInit {
   resultError : boolean;
   message : string;
   tags:Tag[];
+  imgPath: string;
+  hasAvatar: boolean;
 
   constructor(private router: Router, private userService: UserService, public sessionService: SessionService, public alertController: AlertController,
     private creditCardService: CreditCardService) { 
@@ -29,6 +31,8 @@ export class ViewProfilePage implements OnInit {
     this.resultSuccess = false;
     this.user = this.sessionService.getCurrentUser();
     this.tags = this.user.tags;
+    this.imgPath = this.user.avatar;
+    this.hasAvatar = false;
   }
 
   ngOnInit() {
@@ -43,6 +47,14 @@ export class ViewProfilePage implements OnInit {
     {
       this.tags = this.user.tags;
     }
+
+    if (this.user.avatar != undefined)
+    {
+      this.hasAvatar = true;
+    } else {
+      this.hasAvatar = false;
+    }
+
   }
 
   ionViewWillEnter() {
@@ -57,6 +69,13 @@ export class ViewProfilePage implements OnInit {
     if (this.user.tags != undefined)
     {
       this.tags = this.user.tags;
+    }
+    if (this.user.avatar != undefined)
+    {
+      this.hasAvatar = true;
+      this.imgPath = this.user.avatar;
+    } else {
+      this.hasAvatar = false;
     }
   }
 

@@ -14,6 +14,9 @@
 
 <ion-content>	
   <div style="margin-top: 30px;"><ion-label style="margin: 15px;color:#014eb6;font-size: large;"><b> Profile</b></ion-label></div>
+  <div style="margin:10px;" *ngIf="hasAvatar">
+    <ion-img src="http://localhost:8080/Nusurvey-war/uploadedFiles/{{sessionService.getCurrentUser().avatar}}" style="width: 200px; height: 200px;"></ion-img>
+  </div>
   <ion-list *ngIf="user != undefined">
     <ion-item>
       <ion-label><b>First Name: </b></ion-label>

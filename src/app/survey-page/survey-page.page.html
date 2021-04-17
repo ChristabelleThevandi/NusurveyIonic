@@ -18,6 +18,9 @@
       <ion-list>
         <ion-item *ngFor="let questionWrapper of surveyToView.questionWrappers">
           <ion-grid>
+            <ion-row *ngIf ="questionWrapper.hasImage">
+              <ion-img src="http://localhost:8080/Nusurvey-war/uploadedFiles/{{questionWrapper.imgPath}}" style="width: 200px; height: 200px; margin:10px"></ion-img>
+            </ion-row>
             <ion-row>
               <ion-label>{{questionWrapper.question.title}}</ion-label>
             </ion-row>
