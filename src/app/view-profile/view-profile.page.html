@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="secondary">
 		<ion-buttons slot="start">
 			<ion-button (click)="back()">
 				<ion-icon slot="start" name="arrow-back"></ion-icon>
@@ -10,7 +10,10 @@
 
 </ion-header>
 
+
+
 <ion-content>	
+  <div style="margin-top: 30px;"><ion-label style="margin: 15px;color:#014eb6;font-size: large;"><b> Profile</b></ion-label></div>
   <ion-list *ngIf="user != undefined">
     <ion-item>
       <ion-label><b>First Name: </b></ion-label>
@@ -43,14 +46,12 @@
     </ion-item>
   </ion-list>
 
-  <ion-card style="text-align: center;" *ngIf="user != undefined">
-		<ion-card-content>
-			<ion-button (click)="updateProfile()">
+  <div style="text-align: center;margin: 10px;" *ngIf="user != undefined">
+			<ion-button (click)="updateProfile()" expand="full">
 				<ion-icon slot="start" name="create"></ion-icon>
 				Update Profile
 			</ion-button>
-		</ion-card-content>
-	</ion-card>
+	</div>
 
   <div *ngIf="resultSuccess == true" style="color: blue;">
     {{message}}
@@ -60,6 +61,7 @@
     {{message}}
   </div>
 
+  <div style="margin-top: 30px;"><ion-label style="margin: 15px;color:#014eb6;font-size: large;"><b> Credit Card</b></ion-label></div>
   <ion-list *ngIf="hasCreditCard">
     <ion-item>
       <ion-label><b>Name on Card: </b></ion-label>
@@ -82,38 +84,33 @@
     </ion-item>
   </ion-list>
 
-  <ion-card style="text-align: center;" *ngIf="hasCreditCard">
-		<ion-card-content>
-			<ion-button (click)="deleteCreditCard()">
+  <div style="text-align: center;margin: 10px;" *ngIf="hasCreditCard">
+			<ion-button (click)="deleteCreditCard()"expand="full"> 
 				<ion-icon slot="start" name="create"></ion-icon>
 				Delete Credit Card
 			</ion-button>
-		</ion-card-content>
-	</ion-card>
+    </div>
 
-  <ion-card style="text-align: center;" *ngIf="!hasCreditCard">
-		<ion-card-content>
-			<ion-button (click)="updateCreditCard()">
+  <div style="text-align: center;margin: 10px;" *ngIf="!hasCreditCard">
+			<ion-button (click)="updateCreditCard()" expand="full">
 				<ion-icon slot="start" name="create"></ion-icon>
 				Add Credit Card
 			</ion-button>
-		</ion-card-content>
-	</ion-card>
+    </div>
 
-  <ion-label><b> Tags</b></ion-label>
+  <div style="margin-top: 30px;"><ion-label style="margin: 15px;color:#014eb6;font-size: large;"><b> Tags</b></ion-label></div>
+
   <ion-list>
     <ion-item expand="full" *ngFor="let tag of tags">  
       {{tag.tag_name}}
     </ion-item>
   </ion-list>
 
-  <ion-card style="text-align: center;" *ngIf="user != undefined">
-		<ion-card-content>
-			<ion-button (click)="updateTag()">
+  <div style="text-align: center;margin: 10px;" *ngIf="user != undefined">
+			<ion-button (click)="updateTag()" expand="full">
 				<ion-icon slot="start" name="create"></ion-icon>
 				Update Tags
 			</ion-button>
-		</ion-card-content>
-	</ion-card>
+	</div>
 
 </ion-content>
