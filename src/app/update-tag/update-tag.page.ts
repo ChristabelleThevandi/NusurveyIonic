@@ -31,7 +31,7 @@ export class UpdateTagPage implements OnInit {
     this.user = this.sessionService.getCurrentUser();
     this.updateTagReq = new UpdateTagReq();
     this.updateTagReq.user = this.user;
-    this.selected_Tags = new Array();
+    this.selected_Tags = this.sessionService.getCurrentUser().tags.map(x => x.tag_name);
    }
 
   ngOnInit() {
@@ -48,7 +48,7 @@ ionViewWillEnter() {
         this.tagService.retrieveAllTags().subscribe(
           response => {
             this.original_Tags = response;
-            this.selected_Tags = response.map(x => x.tag_name);
+            // this.selected_Tags = response.map(x => x.tag_name);
           },
           error => {
             console.log("error:" + error);

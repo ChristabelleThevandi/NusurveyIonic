@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
@@ -10,23 +10,44 @@
   <ion-searchbar (ionChange)="searchSurveysByTitle($event)"></ion-searchbar>
 </ion-header>
 
+
+
 <ion-content>
-  <ion-card *ngIf="sessionService.getIsLogin() == false">
+  <ion-card *ngIf="sessionService.getIsLogin() == false" color="tertiary">
     <ion-card-header>
-      <ion-card-title>Welcome to NUS Survey</ion-card-title>
+      <ion-card-title style="text-transform:none!important;"><b>Welcome to NUS Survey :)</b></ion-card-title>
     </ion-card-header>
-    <ion-card-content>
+    <ion-card-content style="color:#a1a4a8">
       <p>Please login or register to start answering surveys!</p>
     </ion-card-content>
   </ion-card>
+  <div *ngIf="sessionService.getIsLogin() == false" style="margin:10px">
+          <ion-img src="../assets/NUS.jpg"></ion-img>
+        </div>
+  <ion-card *ngIf="sessionService.getIsLogin() == true"
+    style="margin-left: 30px; margin-right: 30px; margin-top: 30px; border-radius: 18px;">
+    <ion-card-header color="secondary">
+      <ion-card-title>Search</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>Surveys here</p>
+    </ion-card-content>
+  </ion-card>
+
   <ion-list *ngIf="sessionService.getIsLogin() == true">
-    <ion-button expand="full" *ngFor="let survey of recommendedSurveys" class="surveyButton"
-      (click)="viewSurveyDetails($event, survey)" style="text-transform:none!important;white-space: pre-line;">
-      {{survey.title}}
-      <br /><br />
-      Created by {{survey.creator.first_name}} {{survey.creator.last_name}}
-      <br /><br />
-      Earn ${{survey.reward}}
+    <ion-button clear expand="block" *ngFor="let survey of recommendedSurveys" class="surveyButton"
+      (click)="viewSurveyDetails($event, survey)"
+      style="text-transform:none!important;margin-left: 30px; margin-right: 30px; margin-bottom: 30px;--border-radius: 18px;text-align: left;--padding: 10px;"
+      color="tertiary">
+      <ion-label>
+        <div style="margin-bottom: 20px;font-size: large;"><b>{{survey.title}}</b></div>
+        <div>
+          Created by {{survey.creator.first_name}} {{survey.creator.last_name}}
+        </div>
+        <div style="margin-top: 10px;">
+          <ion-icon name="server-outline" style="top: 10;zoom: 1.2;color: #f7b243;"></ion-icon> Earn ${{survey.reward}}
+        </div>
+       </ion-label>
     </ion-button>
   </ion-list>
 

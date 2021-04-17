@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="secondary">
 		<ion-buttons slot="start">
 			<ion-button (click)="back()">
 				<ion-icon slot="start" name="arrow-back"></ion-icon>
@@ -14,7 +14,7 @@
 	<ion-list>
 	<ion-item>
 		<ion-item>
-            <ion-label fixed>Tags</ion-label>
+            <ion-label>Tags</ion-label>
             <ion-select [(ngModel)]="selected_Tags" multiple="true">
               <ion-select-option *ngFor="let tag of original_Tags" [value]="tag.name">{{tag.tag_name}}</ion-select-option>
             </ion-select>
@@ -22,12 +22,10 @@
 
 	  </ion-item>
 	</ion-list>
-	<ion-card style="text-align: center;" *ngIf="user != undefined">
-		<ion-card-content>
-			<ion-button (click)="updateTag()">
+	<div style="text-align: center;margin: 10px;" *ngIf="user != undefined">
+			<ion-button (click)="updateTag()" expand="full">
 				<ion-icon slot="start" name="create"></ion-icon>
 				Update Tags
 			</ion-button>
-		</ion-card-content>
-	</ion-card>
+		</div>
 </ion-content>
