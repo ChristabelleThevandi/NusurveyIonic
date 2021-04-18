@@ -7,7 +7,7 @@ import { Survey } from "./survey";
 import { TextOption } from "./text-option";
 
 export class QuestionWrapper {
- //   id : number | undefined;
+    id : number | undefined;
     question : Question | undefined;
     mcq : MultipleChoiceOption[] | undefined;
     text : TextOption | undefined;

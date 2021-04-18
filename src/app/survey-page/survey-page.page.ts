@@ -106,6 +106,7 @@ export class SurveyPagePage implements OnInit {
     responseToSend.surveyee = this.sessionService.getCurrentUser();
 
     for (let aw of responseToSend.answerWrappers) {
+      aw.questionWrapperId = aw.questionWrapper.id;
       if (aw.questionWrapper.question.mcq) {
         for (let mcqoption of aw.questionWrapper.mcq) {
           if (mcqoption.content === aw.multipleChoiceAnswer.optionChosenString) {
