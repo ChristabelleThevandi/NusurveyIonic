@@ -5,6 +5,7 @@ import { Survey } from '../models/survey';
 import { SurveyService } from '../services/survey.service';
 import { User } from '../models/user';
 import { FacultyType } from '../models/faculty-type.enum';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-index',
@@ -19,7 +20,7 @@ export class IndexPage implements OnInit {
 
 
   constructor(private router: Router,
-    public sessionService: SessionService, public surveyService: SurveyService) {
+    public sessionService: SessionService, public surveyService: SurveyService, public userService : UserService) {
     this.submitted = false;
     this.user = this.sessionService.getCurrentUser();
   }
@@ -45,6 +46,26 @@ export class IndexPage implements OnInit {
       );
     }
   }
+
+  // refreshUser() {
+  //   let email = this.sessionService.getCurrentUser().email;
+  //   let password = this.sessionService.getCurrentUser().password;
+  //   this.userService.userLogin(email, password).subscribe(
+  //     response => {
+  //       let user: User = response;
+
+  //       if (user != null) {
+  //         this.sessionService.setCurrentUser(user);
+  //         this.sessionService.setEmail(email);
+  //         this.sessionService.setPassword(password);
+  //       }
+  //     },
+  //     error => {
+
+  //     }
+  //   );
+  //   console.log(this.sessionService.getCurrentUser().creditCard)
+  // }
 
   searchSurveysByTitle(event: any) {
     this.recommendedSurveys = this.originalSurveys;
