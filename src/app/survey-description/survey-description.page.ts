@@ -22,6 +22,7 @@ export class SurveyDescriptionPage implements OnInit {
   filledSurveys: Survey[];
   user: User;
   hasFilled: boolean;
+  hasCreditCard : boolean;
 
   constructor(private router: Router,
     public sessionService: SessionService, public surveyService: SurveyService, public alertController: AlertController, private activatedRoute: ActivatedRoute) {
@@ -31,6 +32,7 @@ export class SurveyDescriptionPage implements OnInit {
     this.resultSuccess = false;
     this.user = this.sessionService.getCurrentUser();
     this.hasFilled = false;
+    this.hasCreditCard = false;
   }
 
   ngOnInit() {
@@ -49,6 +51,7 @@ export class SurveyDescriptionPage implements OnInit {
       response => {
         this.surveyToView = response;
         this.checkHasFilled();
+        this.checkCreditCard();
       },
       error => {
         this.retrieveSurveyError = true;
@@ -57,19 +60,24 @@ export class SurveyDescriptionPage implements OnInit {
     );
   }
 
-checkHasFilled() {
-  this.surveyService.retrieveMyFilledSurveys(this.user.email).subscribe(
-    response => {
-      this.filledSurveys = response;
-      if(this.filledSurveys.includes(this.surveyToView))  {
-        this.hasFilled = true;
+  checkHasFilled() {
+    this.surveyService.retrieveMyFilledSurveys(this.user.email).subscribe(
+      response => {
+        this.filledSurveys = response;
+        for (var fs of this.filledSurveys)
+        {
+          if (fs.surveyId == this.surveyToView.surveyId)
+          {
+            this.hasFilled = true;
+            break;
+          }
+        }
+      },
+      error => {
+        console.log("**************************** ViewFilledSurveys.ts: " + error);
       }
-    },
-    error => {
-      console.log("**************************** ViewFilledSurveys.ts: " + error);
-    }
-  );
-}
+    );
+  }
 
   answerSurvey() {
     this.router.navigate(["/survey-page/" + this.surveyToView.surveyId]);
@@ -79,4 +87,12 @@ checkHasFilled() {
     this.router.navigate(["/index"]);
   }
 
+  checkCreditCard() {
+    if (this.user.creditCard != undefined)
+    {
+      this.hasCreditCard = true;
+    } else {
+      this.hasCreditCard = false;
+    }
+  }
 }

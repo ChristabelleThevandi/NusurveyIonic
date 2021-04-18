@@ -54,7 +54,7 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-card *ngIf="retrieveSurveyError == false && surveyToView != null && hasFilled == false">
+  <ion-card *ngIf="retrieveSurveyError == false && surveyToView != null && hasFilled == false && hasCreditCard">
     <ion-card-content>
       <ion-button expand="full" (click)="answerSurvey()">
         Start Answering
@@ -62,13 +62,23 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-card *ngIf="hasFilled == true">
+  <ion-card *ngIf="hasFilled">
     <ion-card-content>
       <ion-lable>
         You have answered this survey!
       </ion-lable>
     </ion-card-content>
   </ion-card>
+
+  <ion-card *ngIf="!hasCreditCard">
+    <ion-card-content>
+      <ion-lable>
+        Please register credit card to answer survey!
+      </ion-lable>
+    </ion-card-content>
+  </ion-card>
+
+
 
 </ion-content>
 
