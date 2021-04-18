@@ -12,7 +12,7 @@ export class CreditCard {
     user: User | undefined;
     transactions: Transaction[] | undefined;
     constructor() {
-
+       this.balance = 1500;
     }
     // constructor(name?: string, card_number?: string, cvv?: string, expiry_date?: Date){
     //     this.name = name;
