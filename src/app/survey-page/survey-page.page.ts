@@ -12,6 +12,7 @@ import { QuestionWrapper } from '../models/question-wrapper';
 import { SliderAnswer } from '../models/slider-answer';
 import { SliderOption } from '../models/slider-option';
 import { Survey } from '../models/survey';
+import { User } from '../models/user';
 import { SurveyResponse } from '../models/surveyResponse';
 import { TextAnswer } from '../models/text-answer';
 import { TextOption } from '../models/text-option';
@@ -35,6 +36,7 @@ export class SurveyPagePage implements OnInit {
   resultSuccess: boolean;
   resultError: boolean;
   message: string;
+  user : User;
 
   constructor(private router: Router,
     public sessionService: SessionService, public responseService: ResponseService, public surveyService: SurveyService, public alertController: AlertController, private activatedRoute: ActivatedRoute) {
@@ -144,6 +146,9 @@ export class SurveyPagePage implements OnInit {
           this.message = response;
           this.message = "Response sent successfully";
           this.router.navigate(["/survey-result"]);
+          this.user = this.sessionService.getCurrentUser();
+          this.user.creditCard.balance += this.surveyToView.price_per_response;
+          this.sessionService.setCurrentUser(this.user);
         },
         error => {
           this.resultError = true;

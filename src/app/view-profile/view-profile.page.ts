@@ -112,7 +112,7 @@ export class ViewProfilePage implements OnInit {
                 this.resultError = false;
                 this.creditCard = null;
                 this.hasCreditCard = false;
-                this.user.creditCard = null;
+                this.user.creditCard = undefined;
                 this.message = "Deleted Credit Card!"
                 this.sessionService.setCurrentUser(this.user);
               },
