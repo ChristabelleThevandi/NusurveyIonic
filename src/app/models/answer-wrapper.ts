@@ -13,6 +13,7 @@ export class AnswerWrapper {
     sliderAnswer: SliderAnswer | undefined;
     textAnswer: TextAnswer | undefined;
     surveyResponse: SurveyResponse | undefined;
+    questionWrapperId: number | undefined;
 
     constructor(questionWrapper?: QuestionWrapper, checkboxAnswer?: CheckboxAnswer, multipleChoiceAnswer?: MultipleChoiceAnswer,
         sliderAnswer?: SliderAnswer, textAnswer?: TextAnswer) {
